@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{% static 'img/favicon.ico' %}">
+</head>
+<body>
+    {% include 'includes/inc_menu.tpl' %}
+    {% block content %}{% endblock %}
+</body>
+</html>
