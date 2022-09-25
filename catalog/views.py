@@ -4,11 +4,14 @@ from .models import ProductCategory, Product
 from djangomagazin.defs import links_menu
 
 
-def main(request):
+def listing(request, pk=None):
     content = {
-        'title': 'Продукты.',
         'links_menu': links_menu,
-        'categories': ProductCategory.objects.all(),
-        'products': Product.objects.all(),
     }
+    if pk is None:
+        content['list'] = ProductCategory.objects.all()
+        content['title'] = 'Категории товаров'
+    else:
+        content['list'] = []
+        content['title'] = 'Тут пока не доделано'
     return render(request, 'catalog/products.tpl', content)

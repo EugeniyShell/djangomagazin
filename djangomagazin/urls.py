@@ -23,8 +23,8 @@ import catalog.urls as products_urls
 
 urlpatterns = [
     path('', merch_app.main_page, name='main'),
-    path('contacts/', merch_app.contacts_page, name='contacts'),
     path('admin/', admin.site.urls),
+    path('contacts/', merch_app.contacts_page, name='contacts'),
     path('products/', include(products_urls, namespace='products'))
 ]
 
