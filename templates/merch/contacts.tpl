@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}Контакты.{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Продукты{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
     <h1>{{ title }}</h1>

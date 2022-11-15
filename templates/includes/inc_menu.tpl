@@ -2,11 +2,9 @@
     {% for link in links_menu %}
         <li>
             {% with pre=request.resolver_match %}
-                <a class="{% if pre.url_name == link.href or pre.namespace|add:':'|add:pre.url_name == link.href %}
-                    active
-                {% endif %}" href="{% url link.href %}">
-                    {{ link.name }}
-                </a>
+                <a href="{% url link.href %}"
+                    {% if link.href == pre.url_name or link.href == ''|add:pre.namespace|add:':'|add:pre.url_name %}class="active"{% endif %}
+                >{{ link.name }}</a>
             {% endwith %}
         </li>
     {% endfor %}

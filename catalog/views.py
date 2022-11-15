@@ -5,13 +5,13 @@ from djangomagazin.defs import links_menu
 
 
 def listing(request, pk=None):
-    content = {
+    context = {
         'links_menu': links_menu,
     }
     if pk is None:
-        content['list'] = ProductCategory.objects.all()
-        content['title'] = 'Категории товаров'
+        context['list'] = ProductCategory.objects.all()
+        context['title'] = 'Категории товаров'
     else:
-        content['list'] = []
-        content['title'] = 'Тут пока не доделано'
-    return render(request, 'catalog/products.tpl', content)
+        context['list'] = Product.objects.all()
+        context['title'] = 'Тут пока не доделано'
+    return render(request, 'catalog/products.tpl', context)
