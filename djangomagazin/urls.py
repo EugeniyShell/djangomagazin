@@ -26,7 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contacts/', merch_app.contacts_page, name='contacts'),
     path('products/', include(products_urls, namespace='products')),
-    # path('adminpanel/', include('adminpanel.urls', namespace='adminpanel')),
 ]
 
 if settings.DEBUG:

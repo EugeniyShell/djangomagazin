@@ -3,6 +3,9 @@ links_menu = [
         {'href': 'products:index', 'name': 'продукты'},
         {'href': 'contacts', 'name': 'контакты'},
 ]
-USER_RIGHTS_ABSOLUTE = 2
-USER_RIGHTS_STANDARD = 1
-USER_RIGHTS_RESTRICTED = 0
+group_permissions = ['Users', 'Stuff', 'Admins']
+test_users = [
+        ("Admin_viewer", 2),
+        ("Searcher_viewer", 1),
+        ("Random_viewer", 0)
+]
