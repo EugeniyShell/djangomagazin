@@ -8,4 +8,18 @@
             {% endwith %}
         </li>
     {% endfor %}
+    <li>
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            Вы не авторизованы!
+        {% endif %}
+    </li>
+    <li>
+        {% if user.is_authenticated %}
+            <a href="{% url 'merch:logout' %}">выйти</a>
+        {% else %}
+            <a href="{% url 'merch:login' %}">войти</a>
+        {% endif %}
+    </li>
 </ul>
