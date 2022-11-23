@@ -14,4 +14,7 @@
         Войти
     </button>
 </form>
+<a href="{% url 'merch:register' %}" class="">
+    Зарегистрироваться
+</a>
 {% endblock %}
