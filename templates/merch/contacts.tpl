@@ -2,4 +2,4 @@
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}Тут пока пусто{% endblock %}

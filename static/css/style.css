@@ -1,12 +1,23 @@
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold.woff2') format('woff2');
+  font-weight: bold;
   font-style: normal;
 }
 
 body {
     font-family: 'Roboto';
+    font-weight: normal;
     min-width: 320px;
     margin: 0;
+}
+
+.active {
+    font-weight: bold;
 }
