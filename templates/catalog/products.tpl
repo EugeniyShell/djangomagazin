@@ -26,6 +26,8 @@
                         <b>{{ item.name }}</b>
                         <br>
                         {{ item.description }}
+                        <br>
+                        <a href="{% url 'basket:add' item.pk %}">КУПИТЬ</a>
                     </li>
                 {% endfor %}
             </ul>

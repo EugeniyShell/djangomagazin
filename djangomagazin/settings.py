@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'merch',
     'catalog',
     'adminpanel',
+    'basket',
 ]
 
 MIDDLEWARE = [

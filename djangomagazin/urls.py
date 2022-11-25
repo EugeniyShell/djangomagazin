@@ -19,14 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 import merch.views as merch_app
-import catalog.urls as products_urls
 
 urlpatterns = [
     path('', merch_app.main_page, name='main'),
+    path('contacts/', merch_app.contacts_page, name='contacts'),
     path('admin/', admin.site.urls),
     path('auth/', include('merch.urls', namespace='merch')),
-    path('contacts/', merch_app.contacts_page, name='contacts'),
-    path('products/', include(products_urls, namespace='products')),
+    path('basket/', include('basket.urls', namespace='basket')),
+    path('products/', include('catalog.urls', namespace='products')),
 ]
 
 if settings.DEBUG:
