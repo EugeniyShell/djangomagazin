@@ -21,4 +21,12 @@
             </li>
         {% endif %}
     </ul>
+    <a href="#" class="search"></a>
+    <a href="{% url 'basket:view' %}" class="basket">
+        <span>
+            {% if basket %}
+                В корзине: {{ basket|length }} предметов.
+            {% endif %}
+        </span>
+    </a>
 {% endwith %}
