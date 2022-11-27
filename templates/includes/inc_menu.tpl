@@ -26,6 +26,8 @@
         <span>
             {% if basket %}
                 В корзине: {{ basket|length }} предметов.
+                {{ basket.0.total_cost|floatformat:0 }} руб
+                ({{ basket.0.total_quantity }} шт)
             {% endif %}
         </span>
     </a>

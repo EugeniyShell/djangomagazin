@@ -34,5 +34,8 @@
         {% else %}
             <p>В этой категории товаров нет.</p>
         {% endif %}
+        <p class="block">
+            Товар дня: {{ hot_product.name }}.
+        </p>
     {% endif %}
 {% endblock %}
