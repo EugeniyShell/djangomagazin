@@ -1,5 +1,6 @@
 import random
 
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 
 from basket.models import Basket
@@ -48,3 +49,21 @@ def listing(request, pk=None):
         context['hot_product'] = hot_product
         #context['same_products'] = same_products
     return render(request, 'catalog/products.tpl', context)
+
+
+def product(request, pk, id):
+    cat = get_object_or_404(ProductCategory, pk=pk)
+    product = Product.objects.get(category__pk=pk, id=id)
+    if not product:
+        raise Http404(
+            "Нет нужного продукта."
+        )
+    context = {
+        'catname': cat.name,
+        'title': 'Страница товара',
+        'links_menu': links_menu,
+        'product': product,
+        'basket': get_basket(request.user),
+    }
+
+    return render(request, 'catalog/product.tpl', context)

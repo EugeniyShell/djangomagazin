@@ -27,6 +27,7 @@
                         <br>
                         {{ item.description }}
                         <br>
+                        <a href="{% url 'products:product' item.category.pk item.pk %}">Перейти на страницу товара</a>
                         <a href="{% url 'basket:add' item.pk %}">КУПИТЬ</a>
                     </li>
                 {% endfor %}
