@@ -10,8 +10,13 @@
         <a href="{% url 'basket:add' product.pk %}">КУПИТЬ</a>
     </p>
     <p>
+        <a href="{% url 'products:category' product.category.pk %}">К странице категории</a>
         <br>
-        <a href="{% url 'products:category' product.category.pk %}">Вернуться на обратно к списку товаров.</a>
+        {% if request.headers.referer %}
+            <a href="{{ request.headers.referer }}">Назад</a>
+        {% else %}
+            <a href="javascript:history.back()">Назад</a>
+        {% endif %}
     </p>
     {% if product.name == hot_product.name %}
         <p>Сегодня {{ product.name }} товар дня.</p>
