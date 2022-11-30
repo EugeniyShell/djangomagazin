@@ -8,6 +8,9 @@
 </h1>
 <form action="{% url 'merch:login' %}" method="post">
     {% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
     {{ login_form.as_p }}
     <br>
     <button type="submit">
