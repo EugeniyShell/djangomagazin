@@ -6,7 +6,7 @@
     <h1>Корзина</h1>
     <p>Пользователь {{ user.username}}</p>
     {% if basket_items %}
-        <table>
+        <table class="basket_list">
             <tr>
                 <th>Товар</th>
                 <th>Цена</th>
