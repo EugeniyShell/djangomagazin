@@ -49,3 +49,6 @@ main {
     color: #fff;
     text-decoration: underline;
 }
+tfoot > tr:last-child > th {
+    border-bottom-width: 0;
+}
