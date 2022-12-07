@@ -10,12 +10,6 @@
   font-weight: bold;
   font-style: normal;
 }
-:root {
-    --bs-primary: #0d6efd;
-    --bs-secondary: #6c757d;
-    --bs-black: #000;
-    --bs-white: #fff;
-}
 html {
     height: 100%;
 }
@@ -26,28 +20,32 @@ body {
     font-family: 'Roboto';
 }
 header {
-    background-color: var(--bs-primary);
-    color: var(--bs-white);
+    background-color: #0d6efd;
+    color: #fff;
     flex: none;
-    padding: 1.5rem;
+    padding: 20px;
 }
 footer {
-    background-color: var(--bs-secondary);
-    color: var(--bs-white);
+    background-color: #6c757d;
+    color: #fff;
     flex: none;
-    padding: 1.5rem;
+    padding: 20px;
 }
 main {
     flex: auto;
-    padding: 1.5rem;
+    padding: 20px;
 }
-.active {
+.active a {
     font-weight: bold;
 }
+.links-menu {
+    margin-bottom: 0;
+}
 .links-menu a {
-    color: var(--bs-white);
+    color: #cfe2ff;
     text-decoration: none;
 }
 .links-menu a:hover {
+    color: #fff;
     text-decoration: underline;
 }

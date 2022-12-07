@@ -2,16 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 
-from catalog.models import Product, ProductCategory
+from catalog.models import Product
 from djangomagazin.defs import links_menu
 from .models import Basket
-
 
 
 @login_required
 def basket_view(request):
     title = 'корзина'
-    basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+    basket_items = Basket.objects.filter(user=request.user).\
+        order_by('product__category')
     context = {
         'title': title,
         'basket_items': basket_items,

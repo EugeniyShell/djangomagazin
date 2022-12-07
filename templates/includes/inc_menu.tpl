@@ -10,6 +10,15 @@
                 <a href="{% url 'merch:edit' %}">{{ user.username }}</a>
             </li>
             <li>
+                <a href="{% url 'basket:view' %}" class="basket">
+                    {% if basket %}
+                        В корзине: {{ basket|length }} предметов.
+                    {% else %}
+                        Корзина пуста
+                    {% endif %}
+                </a>
+            </li>
+            <li>
                 <a href="{% url 'merch:logout' %}">выйти</a>
             </li>
         {% else %}
@@ -21,14 +30,4 @@
             </li>
         {% endif %}
     </ul>
-    <a href="#" class="search"></a>
-    <a href="{% url 'basket:view' %}" class="basket">
-        <span>
-            {% if basket %}
-                В корзине: {{ basket|length }} предметов.
-                {{ basket.0.total_cost|floatformat:0 }} руб
-                ({{ basket.0.total_quantity }} шт)
-            {% endif %}
-        </span>
-    </a>
 {% endwith %}
