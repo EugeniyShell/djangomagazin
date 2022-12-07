@@ -10,14 +10,44 @@
   font-weight: bold;
   font-style: normal;
 }
-
-body {
-    font-family: 'Roboto';
-    font-weight: normal;
-    min-width: 320px;
-    margin: 0;
+:root {
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-black: #000;
+    --bs-white: #fff;
 }
-
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Roboto';
+}
+header {
+    background-color: var(--bs-primary);
+    color: var(--bs-white);
+    flex: none;
+    padding: 1.5rem;
+}
+footer {
+    background-color: var(--bs-secondary);
+    color: var(--bs-white);
+    flex: none;
+    padding: 1.5rem;
+}
+main {
+    flex: auto;
+    padding: 1.5rem;
+}
 .active {
     font-weight: bold;
+}
+.links-menu a {
+    color: var(--bs-white);
+    text-decoration: none;
+}
+.links-menu a:hover {
+    text-decoration: underline;
 }
