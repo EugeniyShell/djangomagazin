@@ -11,8 +11,8 @@
             </li>
             <li>
                 <a href="{% url 'basket:view' %}" class="basket">
-                    {% if basket %}
-                        В корзине: {{ basket|length }} предметов.
+                    {% if basket_items %}
+                        В корзине: {{ basket_items|length }} предметов.
                     {% else %}
                         Корзина пуста
                     {% endif %}
