@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 
@@ -47,7 +47,7 @@ def basket_remove(request, pk):
 def basket_edit(request, pk, qty):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         qty = int(qty)
-        basket_record = get_object_or_404(Basket, pk=(pk))
+        basket_record = get_object_or_404(Basket, pk=pk)
         if qty > 0:
             basket_record.quantity = qty
             basket_record.save()
@@ -56,3 +56,5 @@ def basket_edit(request, pk, qty):
             basket_record.delete()
             result = 0
         return JsonResponse({'result': result})
+    else:
+        raise Http404()

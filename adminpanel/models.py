@@ -9,10 +9,9 @@ class ShopUser(AbstractUser):
     def table(self):
         column_names = {
             'ID': self.id,
-            'Юзернейм': self.username,
-            'Имя + фамилия': self.first_name + self.last_name,
+            'Имя': self.username,
             'Почта': self.email,
-            'Группа': 'нет',
+            'Группа': 'вывод пока не доделан',
             'Активность': self.date_joined,
         }
         return column_names

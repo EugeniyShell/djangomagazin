@@ -1,35 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Админка{% endblock %}
+{% block title %}{{ Title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+    <h1>Общая страница админки</h1>
+    <ul>
+        {% for link in admin_links %}
+            {% for name in link.1 %}
+                <li><a href='{{ name.0 }}/{{ link.0.1 }}'>{{ link.0.0 }}{{ name.1 }}</a></li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
 
-    {% if item_list %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    {% for key in item_list.0.table %}
-                        <th scope="col">{{ key }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in item_list %}
-                    <tr>
-                        {% for value in item.table.values %}
-                            <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="col" colspan="5"><a href='create/'>{{ title_name }}</a></th>
-                </tr>
-            </tfoot>
-        </table>
-    {% else %}
-        <p>В корзине пусто.</p>
-    {% endif %}
+    <h2>Полное содержимое сайта</h2>
+    <ul>
+        {% for link in admin_links_common %}
+            <li><a href={{ link.0 }}>{{ link.1 }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

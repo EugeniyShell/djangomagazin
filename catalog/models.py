@@ -8,6 +8,15 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def table(self):
+        column_names = {
+            'ID': self.id,
+            'Название': self.name,
+            'Описание': self.description,
+        }
+        return column_names
+
 
 class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
@@ -24,3 +33,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
+
+    @property
+    def table(self):
+        column_names = {
+            'ID': self.id,
+            'Название': self.name,
+            'Категория': self.category,
+            'Краткое описание': self.short_desc,
+            'Полное описание': self.description,
+            'Картинка': self.image,
+            'Цена': self.price,
+            'Количество на складе': self.quantity,
+        }
+        return column_names

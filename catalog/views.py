@@ -35,7 +35,7 @@ def listing(request, pk=None):
     }
     basket = get_basket(request.user)
     hot_product = get_hot_product()
-    #same_products = get_same_products(hot_product)
+    # same_products = get_same_products(hot_product)
     if pk:
         cat = get_object_or_404(ProductCategory, pk=pk)
         context['catname'] = cat.name
@@ -47,7 +47,7 @@ def listing(request, pk=None):
         context['title'] = f'Товары в категории {context["catname"]}'
         context['basket'] = basket
         context['hot_product'] = hot_product
-        #context['same_products'] = same_products
+        # context['same_products'] = same_products
     return render(request, 'catalog/products.tpl', context)
 
 
