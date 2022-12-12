@@ -25,19 +25,22 @@ def contacts_page(request):
 
 def login_page(request):
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
-
-    login_form = ShopUserLoginForm(data=request.POST)
-
-    if request.method == 'POST' and login_form.is_valid():
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
-        if user and user.is_active:
-            auth.login(request, user)
-            if 'next' in request.POST.keys():
-                return HttpResponseRedirect(request.POST['next'])
-            else:
-                return HttpResponseRedirect(reverse('main'))
+    if request.method == 'POST':
+        login_form = ShopUserLoginForm(data=request.POST)
+        if login_form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            if user and user.is_active:
+                auth.login(request, user)
+                if 'next' in request.POST.keys():
+                    return HttpResponseRedirect(request.POST['next'])
+                else:
+                    return HttpResponseRedirect(reverse('main'))
+        else:
+            print(login_form.errors)
+    else:
+        login_form = ShopUserLoginForm()
 
     context = {
         'title': 'вход',
@@ -67,10 +70,15 @@ def edit_user(request):
 
 
 def register_user(request):
-    register_form = ShopUserRegisterForm(request.POST)
-    if request.method == 'POST' and register_form.is_valid():
-        register_form.save()
-        return HttpResponseRedirect(reverse('merch:login'))
+    if request.method == 'POST':
+        register_form = ShopUserRegisterForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            return HttpResponseRedirect(reverse('merch:login'))
+        else:
+            print(register_form.errors)
+    else:
+        register_form = ShopUserRegisterForm()
     context = {
         'title': 'регистрация',
         'links_menu': links_menu,
