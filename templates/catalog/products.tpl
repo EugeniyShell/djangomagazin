@@ -20,18 +20,24 @@
     {% if title %}
         <h2>{{ title }}</h2>
         {% if prolist %}
-            <ul>
+            <div class="gridrow row">
                 {% for item in prolist %}
-                    <li>
-                        <b>{{ item.name }}</b>
-                        <br>
-                        {{ item.description }}
-                        <br>
-                        <a href="{% url 'products:product' item.category.pk item.pk %}">Перейти на страницу товара</a>
-                        <a href="{% url 'basket:add' item.pk %}">КУПИТЬ</a>
-                    </li>
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                        <div class="card">
+                            <div class="card-header text-end">
+                                {{ item.category }}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">{{ item.description }}</p>
+                                <a class="card-link" href="{% url 'products:product' item.category.pk item.pk %}">На страницу товара</a>
+                                <br>
+                                <a class="btn btn-primary" href="{% url 'basket:add' item.pk %}">КУПИТЬ</a>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <p>В этой категории товаров нет.</p>
         {% endif %}

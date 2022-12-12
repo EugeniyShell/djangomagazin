@@ -1,33 +1,40 @@
 {% with pre=request.resolver_match %}
-    <ul class="links-menu">
-        {% for link in links_menu %}
-            <li {% if link.href == pre.url_name or link.href == ''|add:pre.namespace|add:':'|add:pre.url_name %}class="active"{% endif %}>
-                <a href="{% url link.href %}">{{ link.name }}</a>
-            </li>
-        {% endfor %}
-        {% if user.is_authenticated %}
-            <li {% if pre.namespace == 'merch' and pre.url_name == 'edit' %}class="active"{% endif %}>
-                <a href="{% url 'merch:edit' %}">{{ user.username }}</a>
-            </li>
-            <li>
-                <a href="{% url 'basket:view' %}" class="basket">
-                    {% if basket_items %}
-                        В корзине: {{ basket_items|length }} предметов.
-                    {% else %}
-                        Корзина пуста
-                    {% endif %}
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'merch:logout' %}">выйти</a>
-            </li>
-        {% else %}
-            <li {% if pre.namespace == 'merch' and pre.url_name == 'login' %}class="active"{% endif %}>
-                <a href="{% url 'merch:login' %}">войти</a>
-            </li>
-            <li {% if pre.namespace == 'merch' and pre.url_name == 'register' %}class="active"{% endif %}>
-                <a href="{% url 'merch:register' %}">зарегистрироваться</a>
-            </li>
-        {% endif %}
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto links-menu">
+                {% for link in links_menu %}
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link{% if link.href == pre.url_name or link.href == ''|add:pre.namespace|add:':'|add:pre.url_name %} active{% endif %}" aria-current="page" href="{% url link.href %}">{{ link.name }}</a>
+                    </li>
+                {% endfor %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link{% if pre.namespace == 'merch' and pre.url_name == 'edit' %} active{% endif %}" href="{% url 'merch:edit' %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link basket{% if pre.namespace == 'basket' and pre.url_name == 'view' %} active{% endif %}" href="{% url 'basket:view' %}">
+                            {% if basket_items %}
+                                В корзине: {{ basket_items|length }} предметов.
+                            {% else %}
+                                Корзина пуста
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'merch:logout' %}">выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item me-lg-4">
+                        <a class="nav-link{% if pre.namespace == 'merch' and pre.url_name == 'login' %} active{% endif %}" href="{% url 'merch:login' %}">войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if pre.namespace == 'merch' and pre.url_name == 'register' %} active{% endif %}" href="{% url 'merch:register' %}">зарегистрироваться</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 {% endwith %}
