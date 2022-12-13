@@ -5,7 +5,7 @@ import adminpanel.views as adminpanel
 app_name = 'ap'
 
 urlpatterns = [
-    path('', adminpanel.list, name='list'),
+    path('', adminpanel.all_list, name='list'),
     path('users/', adminpanel.users_list, name='users_list'),
     path('categories/', adminpanel.categories_list, name='categories_list'),
     path('products/', adminpanel.products_list, name='products_list'),

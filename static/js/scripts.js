@@ -16,4 +16,9 @@ $(function(){
             }
         });
     });
+    $('#ap_reg .btn').click(function(){
+        let f = this.parentNode;
+        f.password1.value = f.password2.value;
+        f.submit();
+    });
 });

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ Title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
     <h1>Общая страница админки</h1>
