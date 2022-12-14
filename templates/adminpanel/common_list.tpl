@@ -23,6 +23,7 @@
                             <td>{{ value }}</td>
                         {% endfor %}
                         <td><a href="read/{{ item.table.ID }}/">Смотреть</a></td>
+                        <td><a href="update/{{ item.table.ID }}/">Редактировать</a></td>
                         <td><a href="delete/{{ item.table.ID }}/">Удалить</a></td>
                     </tr>
                 {% endfor %}

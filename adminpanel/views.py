@@ -21,35 +21,12 @@ def all_list(request):
 
 
 def users_list(request):
-    users_items = ShopUser.objects.all().order_by('-is_active', '-is_superuser',
-                                                 '-is_staff', 'username')
+    users_items = ShopUser.objects.all().order_by('id')
     context = {
         'title': 'Админка: список пользователей',
         'title_name': 'Создать нового пользователя',
         'links_menu': links_menu,
         'item_list': users_items,
-    }
-    return render(request, 'adminpanel/common_list.tpl', context)
-
-
-def categories_list(request):
-    categories_items = ProductCategory.objects.all()
-    context = {
-        'title': 'Админка: список категорий',
-        'title_name': 'Создать новую категорию',
-        'links_menu': links_menu,
-        'item_list': categories_items,
-    }
-    return render(request, 'adminpanel/common_list.tpl', context)
-
-
-def products_list(request):
-    products_items = Product.objects.all()
-    context = {
-        'title': 'Админка: список продуктов',
-        'title_name': 'Создать новый продукт',
-        'links_menu': links_menu,
-        'item_list': products_items,
     }
     return render(request, 'adminpanel/common_list.tpl', context)
 
@@ -63,6 +40,77 @@ def baskets_list(request):
         'item_list': basket_items,
     }
     return render(request, 'adminpanel/common_list.tpl', context)
+
+
+def categories_list(request):
+    categories_items = ProductCategory.objects.all().order_by('id')
+    context = {
+        'title': 'Админка: список категорий',
+        'title_name': 'Создать новую категорию',
+        'links_menu': links_menu,
+        'item_list': categories_items,
+    }
+    return render(request, 'adminpanel/common_list.tpl', context)
+
+
+def products_list(request):
+    products_items = Product.objects.all().order_by('category_id')
+    context = {
+        'title': 'Админка: список продуктов',
+        'title_name': 'Создать новый продукт',
+        'links_menu': links_menu,
+        'item_list': products_items,
+    }
+    return render(request, 'adminpanel/common_list.tpl', context)
+
+
+def user_view(request, pk):
+    users_items = ShopUser.objects.get(id=pk)
+    basket_items = Basket.objects.filter(user_id=pk)
+    context = {
+        'title': 'Просмотр пользователя',
+        'links_menu': links_menu,
+        'item_list': users_items,
+        'basket_items': basket_items,
+        'page': 'users',
+    }
+
+    return render(request, 'adminpanel/view.tpl', context)
+
+
+def basket_view(request, pk):
+    item = Basket.objects.get(id=pk)
+    users_items = ShopUser.objects.get(id=item.user_id)
+    basket_items = Basket.objects.filter(user_id=item.user_id)
+    context = {
+        'title': 'Просмотр корзины',
+        'links_menu': links_menu,
+        'item_list': users_items,
+        'basket_items': basket_items,
+        'page': 'users',
+    }
+
+    return render(request, 'adminpanel/view.tpl', context)
+
+
+def category_view(request, pk):
+    products_items = Product.objects.filter(category_id=pk)
+    print(products_items)
+    context = {
+        'title': 'Список продуктов в категории',
+        'links_menu': links_menu,
+        'item_list': products_items,
+        'page': 'category',
+    }
+    return render(request, 'adminpanel/common_list.tpl', context)
+
+
+def product_view(request):
+    context = {
+        'title': 'Under construction...',
+        'links_menu': links_menu,
+    }
+    return render(request, 'merch/index.tpl', context)
 
 
 def user_create(request):
@@ -82,23 +130,7 @@ def user_create(request):
     return render(request, 'adminpanel/user_create.tpl', context)
 
 
-def user_view(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def user_update(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def user_delete(request):
+def basket_create(request):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
@@ -114,7 +146,25 @@ def category_create(request):
     return render(request, 'merch/index.tpl', context)
 
 
-def category_view(request):
+def product_create(request):
+    context = {
+        'title': 'Under construction...',
+        'links_menu': links_menu,
+    }
+    return render(request, 'merch/index.tpl', context)
+
+
+def user_update(request, pk):
+    users_items = ShopUser.objects.filter(user=request.pk)
+    context = {
+        'title': 'Редактирование пользователя',
+        'links_menu': links_menu,
+        'item_list': users_items,
+    }
+    return render(request, 'adminpanel/common_list.tpl', context)
+
+
+def basket_update(request):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
@@ -130,30 +180,6 @@ def category_update(request):
     return render(request, 'merch/index.tpl', context)
 
 
-def category_delete(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def product_create(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def product_view(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
 def product_update(request):
     context = {
         'title': 'Under construction...',
@@ -162,31 +188,7 @@ def product_update(request):
     return render(request, 'merch/index.tpl', context)
 
 
-def product_delete(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def basket_create(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def basket_view(request):
-    context = {
-        'title': 'Under construction...',
-        'links_menu': links_menu,
-    }
-    return render(request, 'merch/index.tpl', context)
-
-
-def basket_update(request):
+def user_delete(request, pk):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
@@ -195,6 +197,22 @@ def basket_update(request):
 
 
 def basket_delete(request):
+    context = {
+        'title': 'Under construction...',
+        'links_menu': links_menu,
+    }
+    return render(request, 'merch/index.tpl', context)
+
+
+def category_delete(request):
+    context = {
+        'title': 'Under construction...',
+        'links_menu': links_menu,
+    }
+    return render(request, 'merch/index.tpl', context)
+
+
+def product_delete(request):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
