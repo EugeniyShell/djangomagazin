@@ -55,5 +55,5 @@
         <p>Пользователь не добавлял предметов в корзину.</p>
     {% endif %}
 
-    <p><strong><a href="/ap/">В начало</a></th></strong></p>
+    <p><strong><a href="/ap/">В начало</a></strong></p>
 {% endblock %}
