@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
@@ -51,11 +52,13 @@ def login_page(request):
     return render(request, 'merch/login.tpl', context)
 
 
+@login_required
 def logout_page(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
 
+@login_required
 def edit_user(request):
     edit_form = ShopUserEditForm(request.POST, instance=request.user)
     if request.method == 'POST' and edit_form.is_valid():
@@ -85,4 +88,3 @@ def register_user(request):
         'register_form': register_form,
     }
     return render(request, 'merch/register.tpl', context)
-

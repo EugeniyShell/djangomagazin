@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -10,6 +11,7 @@ from djangomagazin.defs import links_menu, admin_links, admin_links_common
 from merch.forms import ShopUserRegisterForm
 
 
+@login_required
 def all_list(request):
     context = {
         'title': 'Общая страница',
@@ -20,6 +22,7 @@ def all_list(request):
     return render(request, 'adminpanel/list.tpl', context)
 
 
+@login_required
 def users_list(request):
     users_items = ShopUser.objects.all().order_by('id')
     context = {
@@ -31,6 +34,7 @@ def users_list(request):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def baskets_list(request):
     basket_items = Basket.objects.all().order_by('user_id')
     context = {
@@ -42,6 +46,7 @@ def baskets_list(request):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def categories_list(request):
     categories_items = ProductCategory.objects.all().order_by('id')
     context = {
@@ -53,6 +58,7 @@ def categories_list(request):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def products_list(request):
     products_items = Product.objects.all().order_by('category_id')
     context = {
@@ -64,6 +70,7 @@ def products_list(request):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def user_view(request, pk):
     users_items = ShopUser.objects.get(id=pk)
     basket_items = Basket.objects.filter(user_id=pk)
@@ -78,6 +85,7 @@ def user_view(request, pk):
     return render(request, 'adminpanel/view.tpl', context)
 
 
+@login_required
 def basket_view(request, pk):
     item = Basket.objects.get(id=pk)
     users_items = ShopUser.objects.get(id=item.user_id)
@@ -93,6 +101,7 @@ def basket_view(request, pk):
     return render(request, 'adminpanel/view.tpl', context)
 
 
+@login_required
 def category_view(request, pk):
     products_items = Product.objects.filter(category_id=pk)
     print(products_items)
@@ -105,6 +114,7 @@ def category_view(request, pk):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def product_view(request):
     context = {
         'title': 'Under construction...',
@@ -113,6 +123,7 @@ def product_view(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def user_create(request):
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST)
@@ -130,6 +141,7 @@ def user_create(request):
     return render(request, 'adminpanel/user_create.tpl', context)
 
 
+@login_required
 def basket_create(request):
     context = {
         'title': 'Under construction...',
@@ -138,6 +150,7 @@ def basket_create(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def category_create(request):
     context = {
         'title': 'Under construction...',
@@ -146,6 +159,7 @@ def category_create(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def product_create(request):
     context = {
         'title': 'Under construction...',
@@ -154,6 +168,7 @@ def product_create(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def user_update(request, pk):
     users_items = ShopUser.objects.filter(user=request.pk)
     context = {
@@ -164,6 +179,7 @@ def user_update(request, pk):
     return render(request, 'adminpanel/common_list.tpl', context)
 
 
+@login_required
 def basket_update(request):
     context = {
         'title': 'Under construction...',
@@ -172,6 +188,7 @@ def basket_update(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def category_update(request):
     context = {
         'title': 'Under construction...',
@@ -180,6 +197,7 @@ def category_update(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def product_update(request):
     context = {
         'title': 'Under construction...',
@@ -188,6 +206,7 @@ def product_update(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def user_delete(request, pk):
     context = {
         'title': 'Under construction...',
@@ -196,6 +215,7 @@ def user_delete(request, pk):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def basket_delete(request):
     context = {
         'title': 'Under construction...',
@@ -204,6 +224,7 @@ def basket_delete(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def category_delete(request):
     context = {
         'title': 'Under construction...',
@@ -212,6 +233,7 @@ def category_delete(request):
     return render(request, 'merch/index.tpl', context)
 
 
+@login_required
 def product_delete(request):
     context = {
         'title': 'Under construction...',
