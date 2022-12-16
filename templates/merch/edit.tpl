@@ -6,7 +6,7 @@
 <h1>
     Изменить профиль
 </h1>
-<form action="{% url 'merch:register' %}" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ edit_form.as_p }}
     <br>

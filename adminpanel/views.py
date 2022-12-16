@@ -1,14 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from adminpanel.models import ShopUser
 from basket.models import Basket
+from catalog.forms import ProductCategoryEditForm, ProductEditForm
 from catalog.models import ProductCategory, Product
 from djangomagazin.defs import links_menu, admin_links, admin_links_common
-from merch.forms import ShopUserRegisterForm
+from merch.forms import ShopUserRegisterForm, ShopUserEditForm
 
 
 @login_required
@@ -134,10 +135,15 @@ def product_view(request, pk):
 
 @login_required
 def user_create(request):
+    group = None
+    grouperror = None
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST)
-        group = Group.objects.get(name=request.POST['group'])
-        if register_form.is_valid():
+        try:
+            group = Group.objects.get(name=request.POST['group'])
+        except:
+            grouperror = 'Обязательное поле.'
+        if register_form.is_valid() and group:
             group.user_set.add(register_form.save())
             return HttpResponseRedirect(reverse('ap:users_list'))
     else:
@@ -146,6 +152,7 @@ def user_create(request):
         'title': 'Создание нового пользователя',
         'links_menu': links_menu,
         'register_form': register_form,
+        'grouperror': grouperror
     }
     return render(request, 'adminpanel/user_create.tpl', context)
 
@@ -161,31 +168,56 @@ def basket_create(request):
 
 @login_required
 def category_create(request):
+    if request.method == 'POST':
+        create_form = ProductCategoryEditForm(request.POST)
+        if create_form.is_valid():
+            create_form.save()
+            return HttpResponseRedirect(reverse('ap:categories_list'))
+    else:
+        create_form = ProductCategoryEditForm()
     context = {
-        'title': 'Under construction...',
+        'title': 'Создание новой категории',
         'links_menu': links_menu,
+        'create_form': create_form,
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/category_edit.tpl', context)
 
 
 @login_required
 def product_create(request):
+    if request.method == 'POST':
+        create_form = ProductEditForm(request.POST)
+        if create_form.is_valid():
+            create_form.save()
+            return HttpResponseRedirect(reverse('ap:products_list'))
+    else:
+        create_form = ProductEditForm()
     context = {
-        'title': 'Under construction...',
+        'title': 'Создание нового продукта',
         'links_menu': links_menu,
+        'create_form': create_form,
+        'catlist': ProductCategory.objects.all(),
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/product_edit.tpl', context)
 
 
 @login_required
 def user_update(request, pk):
-    users_items = ShopUser.objects.filter(user=request.pk)
+    user = get_object_or_404(ShopUser, pk=pk)
+    if request.method == 'POST':
+        update_form = ShopUserEditForm(request.POST, instance=user)
+        if update_form.is_valid():
+            update_form.save()
+            return HttpResponseRedirect(reverse('ap:user_view',
+                                                kwargs={'pk':pk}))
+    else:
+        update_form = ShopUserEditForm(instance=user)
     context = {
-        'title': 'Редактирование пользователя',
-        'links_menu': links_menu,
-        'item_list': users_items,
-    }
-    return render(request, 'adminpanel/common_list.tpl', context)
+            'title': 'Редактирование пользователя',
+            'links_menu': links_menu,
+            'register_form': update_form,
+        }
+    return render(request, 'adminpanel/user_update.tpl', context)
 
 
 @login_required
@@ -198,7 +230,7 @@ def basket_update(request):
 
 
 @login_required
-def category_update(request):
+def category_update(request, pk):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
@@ -207,7 +239,7 @@ def category_update(request):
 
 
 @login_required
-def product_update(request):
+def product_update(request, pk):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,

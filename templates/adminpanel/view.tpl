@@ -21,7 +21,7 @@
                     {% for value in primary_data.table.values %}
                         <td>{{ value }}</td>
                     {% endfor %}
-                    <td><a href="/ap/{{ primary_page }}/edit/{{ primary_data.table.ID }}/">Редактировать</a></td>
+                    <td><a href="/ap/{{ primary_page }}/update/{{ primary_data.table.ID }}/">Редактировать</a></td>
                     <td><a href="/ap/{{ primary_page }}/delete/{{ primary_data.table.ID }}/">Удалить</a></td>
                 </tr>
             </tbody>
@@ -45,7 +45,7 @@
                         {% for value in item.table.values %}
                             <td>{{ value }}</td>
                         {% endfor %}
-                        <td><a href="/ap/{{ secondary_page }}/edit/{{ item.table.ID }}/">Редактировать</a></td>
+                        <td><a href="/ap/{{ secondary_page }}/update/{{ item.table.ID }}/">Редактировать</a></td>
                         <td><a href="/ap/{{ secondary_page }}/delete/{{ item.table.ID }}/">Удалить</a></td>
                     </tr>
                 {% endfor %}

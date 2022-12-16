@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>Создание нового пользователя</h1>
-<form action="{% url 'ap:user_create' %}" method="post" enctype="multipart/form-data" class="col-md-6 col-lg-4 col-xl-3" id="ap_reg">
+<form method="post" enctype="multipart/form-data" class="col-md-6 col-lg-4 col-xl-3" id="ap_reg">
     {% csrf_token %}
     <div class="mb-3">
         <label for="id_username" class="form-label">Имя</label>
@@ -29,12 +29,15 @@
         {% endfor %}
     </div>
     <div class="mb-3">
-        <select class="form-select" aria-label="Default select example" name="group">
+        <select class="form-select{% if grouperror %} is-invalid{% endif %}" aria-label="Default select example" name="group" required>
             <option selected disabled>Группа допуска</option>
             <option value="Users">Пользователь</option>
             <option value="Stuff">Персонал</option>
             <option value="Admins">Админ</option>
         </select>
+        {% if grouperror %}
+            <div class="invalid-feedback">{{ grouperror }}</div>
+        {% endif %}
     </div>
     <button type="button" class="btn btn-primary">Создать</button>
 </form>

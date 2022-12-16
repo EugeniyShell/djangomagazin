@@ -6,7 +6,7 @@
 <h1>
     Форма регистрации
 </h1>
-<form action="{% url 'merch:register' %}" method="post" enctype="multipart/form-data" class="col-md-6 col-lg-4 col-xl-3">
+<form method="post" enctype="multipart/form-data" class="col-md-6 col-lg-4 col-xl-3">
     {% csrf_token %}
     <div class="mb-3">
         <label for="id_username" class="form-label">Ваше имя</label>

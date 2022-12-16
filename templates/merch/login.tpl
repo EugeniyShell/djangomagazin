@@ -6,7 +6,7 @@
 <h1>
     Форма авторизации
 </h1>
-<form action="{% url 'merch:login' %}" method="post" class="col-md-6 col-lg-4 col-xl-3">
+<form method="post" class="col-md-6 col-lg-4 col-xl-3">
     {% csrf_token %}
     {% if next %}
         <input type="hidden" name="next" value="{{ next }}">
