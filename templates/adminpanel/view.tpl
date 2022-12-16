@@ -5,11 +5,11 @@
 {% block content %}
     <h1>{{ title }}</h1>
 
-    {% if item_list %}
+    {% if primary_data %}
         <table class="table table-striped">
             <thead>
                 <tr>
-                    {% for key in item_list.table %}
+                    {% for key in primary_data.table %}
                         <th scope="col">{{ key }}</th>
                     {% endfor %}
                     <th scope="col"></th>
@@ -18,21 +18,21 @@
             </thead>
             <tbody>
                 <tr>
-                    {% for value in item_list.table.values %}
+                    {% for value in primary_data.table.values %}
                         <td>{{ value }}</td>
                     {% endfor %}
-                    <td><a href="/ap/{{ page }}/edit/{{item_list.table.ID}}/">Редактировать</a></td>
-                    <td><a href="/ap/{{ page }}/delete/{{item_list.table.ID}}/">Удалить</a></td>
+                    <td><a href="/ap/{{ primary_page }}/edit/{{ primary_data.table.ID }}/">Редактировать</a></td>
+                    <td><a href="/ap/{{ primary_page }}/delete/{{ primary_data.table.ID }}/">Удалить</a></td>
                 </tr>
             </tbody>
         </table>
     {% endif %}
 
-    {% if basket_items %}
+    {% if secondary_data %}
         <table class="table table-striped">
             <thead>
                 <tr>
-                    {% for key in basket_items.0.table %}
+                    {% for key in secondary_data.0.table %}
                         <th scope="col">{{ key }}</th>
                     {% endfor %}
                     <th scope="col"></th>
@@ -40,13 +40,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in basket_items %}
+                {% for item in secondary_data %}
                     <tr>
                         {% for value in item.table.values %}
                             <td>{{ value }}</td>
                         {% endfor %}
-                        <td><a href="/ap/{{ page }}/edit/{{item_list.table.ID}}/">Редактировать</a></td>
-                        <td><a href="/ap/{{ page }}/delete/{{item_list.table.ID}}/">Удалить</a></td>
+                        <td><a href="/ap/{{ secondary_page }}/edit/{{ item.table.ID }}/">Редактировать</a></td>
+                        <td><a href="/ap/{{ secondary_page }}/delete/{{ item.table.ID }}/">Удалить</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -72,55 +72,64 @@ def products_list(request):
 
 @login_required
 def user_view(request, pk):
-    users_items = ShopUser.objects.get(id=pk)
+    users_items = ShopUser.objects.get(pk=pk)
     basket_items = Basket.objects.filter(user_id=pk)
     context = {
         'title': 'Просмотр пользователя',
         'links_menu': links_menu,
-        'item_list': users_items,
-        'basket_items': basket_items,
-        'page': 'users',
+        'primary_data': users_items,
+        'secondary_data': basket_items,
+        'primary_page': 'users',
+        'secondary_page': 'basket',
     }
-
     return render(request, 'adminpanel/view.tpl', context)
 
 
 @login_required
 def basket_view(request, pk):
-    item = Basket.objects.get(id=pk)
+    item = Basket.objects.get(pk=pk)
     users_items = ShopUser.objects.get(id=item.user_id)
     basket_items = Basket.objects.filter(user_id=item.user_id)
     context = {
         'title': 'Просмотр корзины',
         'links_menu': links_menu,
-        'item_list': users_items,
-        'basket_items': basket_items,
-        'page': 'users',
+        'primary_data': users_items,
+        'secondary_data': basket_items,
+        'primary_page': 'users',
+        'secondary_page': 'basket',
     }
-
     return render(request, 'adminpanel/view.tpl', context)
 
 
 @login_required
 def category_view(request, pk):
+    category = ProductCategory.objects.get(pk=pk)
     products_items = Product.objects.filter(category_id=pk)
-    print(products_items)
     context = {
         'title': 'Список продуктов в категории',
         'links_menu': links_menu,
-        'item_list': products_items,
-        'page': 'category',
+        'primary_data': category,
+        'secondary_data': products_items,
+        'primary_page': 'categories',
+        'secondary_page': 'products',
     }
-    return render(request, 'adminpanel/common_list.tpl', context)
+    return render(request, 'adminpanel/view.tpl', context)
 
 
 @login_required
-def product_view(request):
+def product_view(request, pk):
+    item = Product.objects.get(pk=pk)
+    category = ProductCategory.objects.get(id=item.category_id)
+    products_items = Product.objects.filter(category_id=item.category_id)
     context = {
-        'title': 'Under construction...',
+        'title': 'Список продуктов в категории',
         'links_menu': links_menu,
+        'primary_data': category,
+        'secondary_data': products_items,
+        'primary_page': 'categories',
+        'secondary_page': 'products',
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/view.tpl', context)
 
 
 @login_required
