@@ -231,20 +231,40 @@ def basket_update(request):
 
 @login_required
 def category_update(request, pk):
+    category = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == 'POST':
+        create_form = ProductCategoryEditForm(request.POST, instance=category)
+        if create_form.is_valid():
+            create_form.save()
+            return HttpResponseRedirect(reverse('ap:categories_list'))
+    else:
+        create_form = ProductCategoryEditForm()
     context = {
-        'title': 'Under construction...',
+        'title': 'Редактирование категории',
         'links_menu': links_menu,
+        'create_form': create_form,
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/category_edit.tpl', context)
 
 
 @login_required
 def product_update(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    category = ProductCategory.objects.get(id=product.category_id)
+    if request.method == 'POST':
+        create_form = ProductEditForm(request.POST, instance=product, initial={'category': category})
+        if create_form.is_valid():
+            create_form.save()
+            return HttpResponseRedirect(reverse('ap:products_list'))
+    else:
+        create_form = ProductEditForm()
     context = {
-        'title': 'Under construction...',
+        'title': 'Редактирование продукта',
         'links_menu': links_menu,
+        'create_form': create_form,
+        'catlist': ProductCategory.objects.all(),
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/product_edit.tpl', context)
 
 
 @login_required
@@ -266,18 +286,24 @@ def basket_delete(request):
 
 
 @login_required
-def category_delete(request):
+def category_delete(request, pk):
     context = {
         'title': 'Under construction...',
         'links_menu': links_menu,
+
     }
     return render(request, 'merch/index.tpl', context)
 
 
 @login_required
-def product_delete(request):
+def product_delete(request, pk):
+    item = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        item._raw_delete(item.db)
+        return HttpResponseRedirect(reverse('ap:products_list'))
     context = {
-        'title': 'Under construction...',
+        'title': 'Удаление продукта',
         'links_menu': links_menu,
+        'primary_data': item,
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/delete.tpl', context)

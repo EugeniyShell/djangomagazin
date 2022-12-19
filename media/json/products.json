@@ -1,1 +1,21 @@
-[{"id": 1, "name": "Деревянный стул", "description": "Самый простой стул", "price": 1000, "quantity": 10, "category_id": 1}, {"id": 2, "name": "Удобный стул", "description": "Действительно удобный стул", "price": 2000, "quantity": 10, "category_id": 1}, {"id": 3, "name": "Мягкий стул", "description": "Стул с мягкой обивкой", "price": 3000, "quantity": 5, "category_id": 1}, {"id": 4, "name": "Роскошный стул", "description": "Реально навороченный стул. Но и цена конская.", "price": 10000, "quantity": 1, "category_id": 1}, {"id": 5, "name": "Деревянный стол", "description": "Самый простой стол", "price": 1000, "quantity": 10, "category_id": 2}, {"id": 6, "name": "Обеденный стол", "description": "За ним едят", "price": 2000, "quantity": 10, "category_id": 2}, {"id": 7, "name": "Компьютерный стол", "description": "В нем много разных полочек и ящичков", "price": 4000, "quantity": 5, "category_id": 2}, {"id": 8, "name": "Роскошный стол", "description": "Из черного дерева и с резьбой на ножках", "price": 10000, "quantity": 1, "category_id": 2}, {"id": 9, "name": "Пластмассовая табуретка", "description": "Откровенное барахло", "price": 500, "quantity": 10, "category_id": 3}, {"id": 10, "name": "Деревянная табуретка", "description": "Просто табуретка", "price": 1000, "quantity": 10, "category_id": 3}, {"id": 11, "name": "Табуретка для пианино", "description": "Крутится для регулировки высоты", "price": 5000, "quantity": 5, "category_id": 3}]
+[{"id": 1, "name": "Деревянный стул", "description": "Самый простой стул", "price": 1000, "quantity": 10, "category_id": 1},
+  {"id": 2, "name": "Удобный стул", "description": "Действительно удобный стул", "price": 2000, "quantity": 10, "category_id": 1},
+  {"id": 3, "name": "Мягкий стул", "description": "Стул с мягкой обивкой", "price": 3000, "quantity": 5, "category_id": 1},
+  {"id": 4, "name": "Роскошный стул", "description": "Реально навороченный стул. Но и цена конская.", "price": 10000, "quantity": 1, "category_id": 1},
+  {"id": 5, "name": "Деревянный стол", "description": "Самый простой стол", "price": 1000, "quantity": 10, "category_id": 2},
+  {"id": 6, "name": "Обеденный стол", "description": "За ним едят", "price": 2000, "quantity": 10, "category_id": 2},
+  {"id": 7, "name": "Компьютерный стол", "description": "В нем много разных полочек и ящичков", "price": 4000, "quantity": 5, "category_id": 2},
+  {"id": 8, "name": "Роскошный стол", "description": "Из черного дерева и с резьбой на ножках", "price": 10000, "quantity": 1, "category_id": 2},
+  {"id": 9, "name": "Пластмассовая табуретка", "description": "Откровенное барахло", "price": 500, "quantity": 10, "category_id": 3},
+  {"id": 10, "name": "Деревянная табуретка", "description": "Просто табуретка", "price": 1000, "quantity": 10, "category_id": 3},
+  {"id": 11, "name": "Табуретка для пианино", "description": "Крутится для регулировки высоты", "price": 5000, "quantity": 5, "category_id": 3},
+  {"id": 12, "name": "Барный стул", "description": "Высокий и прочный", "price": 5000, "quantity": 5, "category_id": 3},
+  {"id": 13, "name": "Полено", "description": "Дешево", "price": 5000, "quantity": 5, "category_id": 3},
+  {"id": 14, "name": "Пластиковый стул", "description": "Полностью из пластика", "price": 5000, "quantity": 5, "category_id": 3},
+  {"id": 15, "name": "Кровать с сеткой", "description": "Пружинная сетка", "price": 5000, "quantity": 5, "category_id": 4},
+  {"id": 16, "name": "Подушечка", "description": "Для лежания на спине", "price": 5000, "quantity": 5, "category_id": 4},
+  {"id": 17, "name": "Ватный матрац", "description": "Армейский", "price": 5000, "quantity": 5, "category_id": 4},
+  {"id": 18, "name": "Деревянный ящик", "description": "Простой и дешевый", "price": 20, "quantity": 2, "category_id": 5},
+  {"id": 19, "name": "Бочка", "description": "Железная", "price": 50, "quantity": 8, "category_id": 5},
+  {"id": 20, "name": "Гроб", "description": "На колесиках", "price": 60, "quantity": 1, "category_id": 5}
+]

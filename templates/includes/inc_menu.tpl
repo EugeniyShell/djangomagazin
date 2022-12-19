@@ -24,6 +24,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/ap/">админка</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'merch:logout' %}">выйти</a>
                     </li>
                 {% else %}
