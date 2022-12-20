@@ -23,8 +23,8 @@
         {% endfor %}
     </div>
     <div class="mb-3">
-        <label for="id_description" class="form-label">Полное описание</label>
-        <textarea class="form-control{% if create_form.description.errors %} is-invalid{% endif %}" name="short_desc" id="id_short_desc" rows="3">{% comment %}
+        <label for="id_short_desc" class="form-label">Полное описание</label>
+        <textarea class="form-control{% if create_form.short_desc.errors %} is-invalid{% endif %}" name="short_desc" id="id_short_desc" rows="3">{% comment %}
             {% endcomment %}{% if create_form.short_desc.value %}{{ create_form.short_desc.value }}{% endif %}{% comment %}
         {% endcomment %}</textarea>
         {% for error in create_form.short_desc.errors %}
@@ -32,26 +32,22 @@
         {% endfor %}
     </div>
     <div class="mb-3">
-        <label for="id_description" class="form-label">Цена</label>
-        <input type="number" class="form-control{% if create_form.description.errors %} is-invalid{% endif %}" name="price" id="id_price" {% if create_form.price.value %} value="{{ create_form.price.value }}"{% endif %}>
+        <label for="id_price" class="form-label">Цена</label>
+        <input type="number" class="form-control{% if create_form.price.errors %} is-invalid{% endif %}" name="price" id="id_price" {% if create_form.price.value %} value="{{ create_form.price.value }}"{% endif %}>
         {% for error in create_form.price.errors %}
             <div class="invalid-feedback">{{ error }}</div>
         {% endfor %}
     </div>
     <div class="mb-3">
-        <label for="id_description" class="form-label">Количество на складе</label>
-        <input type="number" class="form-control{% if create_form.description.errors %} is-invalid{% endif %}" name="quantity" id="id_quantity" {% if create_form.quantity.value %} value="{{ create_form.quantity.value }}"{% endif %}>
+        <label for="id_quantity" class="form-label">Количество на складе</label>
+        <input type="number" class="form-control{% if create_form.quantity.errors %} is-invalid{% endif %}" name="quantity" id="id_quantity" {% if create_form.quantity.value %} value="{{ create_form.quantity.value }}"{% endif %}>
         {% for error in create_form.quantity.errors %}
             <div class="invalid-feedback">{{ error }}</div>
         {% endfor %}
     </div>
     <div class="mb-3">
-        <select class="form-select{% if create_form.category.errors %} is-invalid{% endif %}" name="category" id="id_category">
-            <option selected disabled>Выбор категории</option>
-            {% for cat in catlist %}
-                <option value="{{ cat.id }}">{{  cat.name  }}</option>
-            {% endfor %}
-        </select>
+        <label for="{{ create_form.category.auto_id }}" class="form-label">Выбор категории</label>
+        {{ create_form.category }}
         {% for error in create_form.category.errors %}
             <div class="invalid-feedback">{{ error }}</div>
         {% endfor %}

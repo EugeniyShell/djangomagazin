@@ -6,14 +6,15 @@
     <h1>
         {{ title }}
     </h1>
+    {% if title2 %}
+            {{ title2 }}
+    {% endif %}
     <table class="table table-striped">
         <thead>
             <tr>
                 {% for key in primary_data.table %}
                     <th scope="col">{{ key }}</th>
                 {% endfor %}
-                <th scope="col"></th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,9 @@
         </tbody>
     </table>
     <br>
-    <form href="/ap/products_list">
-        <button type="submit" class="btn btn-primary">Подтвердить удаление</button>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Подтвердить удаление</button>
+        <a href="javascript:history.back()" class="btn btn-primary">Не удалять</a>
     </form>
 {% endblock %}

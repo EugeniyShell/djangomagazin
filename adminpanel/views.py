@@ -196,7 +196,6 @@ def product_create(request):
         'title': 'Создание нового продукта',
         'links_menu': links_menu,
         'create_form': create_form,
-        'catlist': ProductCategory.objects.all(),
     }
     return render(request, 'adminpanel/product_edit.tpl', context)
 
@@ -209,14 +208,14 @@ def user_update(request, pk):
         if update_form.is_valid():
             update_form.save()
             return HttpResponseRedirect(reverse('ap:user_view',
-                                                kwargs={'pk':pk}))
+                                                kwargs={'pk': pk}))
     else:
         update_form = ShopUserEditForm(instance=user)
     context = {
-            'title': 'Редактирование пользователя',
-            'links_menu': links_menu,
-            'register_form': update_form,
-        }
+        'title': 'Редактирование пользователя',
+        'links_menu': links_menu,
+        'register_form': update_form,
+    }
     return render(request, 'adminpanel/user_update.tpl', context)
 
 
@@ -238,7 +237,7 @@ def category_update(request, pk):
             create_form.save()
             return HttpResponseRedirect(reverse('ap:categories_list'))
     else:
-        create_form = ProductCategoryEditForm()
+        create_form = ProductCategoryEditForm(instance=category)
     context = {
         'title': 'Редактирование категории',
         'links_menu': links_menu,
@@ -250,19 +249,17 @@ def category_update(request, pk):
 @login_required
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    category = ProductCategory.objects.get(id=product.category_id)
     if request.method == 'POST':
-        create_form = ProductEditForm(request.POST, instance=product, initial={'category': category})
+        create_form = ProductEditForm(request.POST, instance=product)
         if create_form.is_valid():
             create_form.save()
             return HttpResponseRedirect(reverse('ap:products_list'))
     else:
-        create_form = ProductEditForm()
+        create_form = ProductEditForm(instance=product)
     context = {
         'title': 'Редактирование продукта',
         'links_menu': links_menu,
         'create_form': create_form,
-        'catlist': ProductCategory.objects.all(),
     }
     return render(request, 'adminpanel/product_edit.tpl', context)
 
@@ -287,19 +284,24 @@ def basket_delete(request):
 
 @login_required
 def category_delete(request, pk):
+    item = get_object_or_404(ProductCategory, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        return HttpResponseRedirect(reverse('ap:categories_list'))
     context = {
-        'title': 'Under construction...',
+        'title': 'Удаление категории',
+        'title2': 'Категория удаляется вместе со всеми товарами',
         'links_menu': links_menu,
-
+        'primary_data': item,
     }
-    return render(request, 'merch/index.tpl', context)
+    return render(request, 'adminpanel/delete.tpl', context)
 
 
 @login_required
 def product_delete(request, pk):
     item = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
-        item._raw_delete(item.db)
+        item.delete()
         return HttpResponseRedirect(reverse('ap:products_list'))
     context = {
         'title': 'Удаление продукта',
